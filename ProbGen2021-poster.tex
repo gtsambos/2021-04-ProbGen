@@ -83,17 +83,53 @@ The utility of this tool will be demonstrated with simulations, as well as with 
 %%% BLOCK 1
      \begin{columns}%blocks will be placed into columns
          \column{.5}
-         \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. The data structure: tree sequences}{
-\begin{center}
-{\tt\small
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
-\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\[1mm]
+         \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. Data structures and definitions}{
+
+{\fontsize{34}{35}\selectfont The {\bf\magenta{tree sequence}} data structure [1,2] encodes a complete genealogy for a sample of chromosomes in a succinct set of tables. Compared with traditional sequence-based formats, tree sequences are \emph{compact}, \emph{fast} to process and \emph{informative} of the history of the sample.
+
+In diploid species, each position of an organism's genome is inherited from one of the two genomes held by each of the parental individuals.
+Two segments of DNA in different chromosomes that have been inherited whole (ie. unbroken by recombination) from the same ancestral chromosome are said to be {\bf \magenta{ identical by descent}}, or {\bf \magenta{IBD}}.
+An illustration of this process is shown above.
 }
-\[
-\uparrow
-\]
+     }
+     
+     %%%% BLOCK 3
+     \block[titleoffsety=1cm,bodyoffsety=5cm]{3. Example: total IBD sharing over time}{
+     } 
+\centering
+  \begin{subcolumns}
+
+  \subcolumn{.25}
+   \block{}{
+%   \centering
+   \includegraphics[scale=.63]{pics/kinships-10000.png}
+   \includegraphics[scale=.63]{pics/kinships-8000.png}
+    \includegraphics[scale=.63]{pics/kinships-6000.png}
+    \includegraphics[scale=.63]{pics/kinships-4000.png}
+\includegraphics[scale=.63]{pics/kinships-2000.png}
+  }
+   \subcolumn{.6}
+  \block{}{
+%  \centering
+  \input{pics/demographic-example.tex}
+  }
+    \colorlet{notebgcolor}{teal!30}
+   \note[targetoffsetx=0cm, targetoffsety=+11cm,width=.2\textwidth,innersep=.4cm]{
+Using \texttt{msprime} [2], I simulated a three-population demographic scenario, sampling twelve 100Mb chromosomes from each of the three populations. I assumed a recombination rate of $1\times 10^{-8}$ base/generation.
+The five heatplots on the left show the total proportion of IBD sharing between each pair of simulated samples with respect to ancestors from five different time points. 
+The simulation took $\approx 6$ sec to run, and IBD information was extracted in a further $\approx 2$ sec.
+   }
+  \end{subcolumns}
+
+
+
+     \column{.5}
+     %%% BLOCK 2
+         \block[titleoffsety=-3cm,bodyoffsety=1.5cm]{2. IBD and ancestry in tree sequences}{}  
+%          \begin{subcolumns}       
+%         \subcolumn{.45}
+          \block{}{
+\begin{center}
 \input{pics/tree-sequence.tex}
 \[
 \Updownarrow
@@ -154,49 +190,6 @@ location & time& node  \\
  \end{tabularx}
 }
 \end{center}
-\vspace{10mm}
-{\fontsize{34}{35}\selectfont The {\bf\magenta{tree sequence}} data structure [1,2] encodes a complete genealogy for a sample of chromosomes in a succinct set of tables. Compared with traditional sequence-based formats, tree sequences are \emph{compact}, \emph{fast} to process and \emph{informative} of the history of the sample.}
-     }
-     
-     %%%% BLOCK 3
-     \block[titleoffsety=1cm,bodyoffsety=5cm]{3. Example: total IBD sharing over time}{
-     } 
-\centering
-  \begin{subcolumns}
-
-  \subcolumn{.25}
-   \block{}{
-%   \centering
-   \includegraphics[scale=.63]{pics/kinships-10000.png}
-   \includegraphics[scale=.63]{pics/kinships-8000.png}
-    \includegraphics[scale=.63]{pics/kinships-6000.png}
-    \includegraphics[scale=.63]{pics/kinships-4000.png}
-\includegraphics[scale=.63]{pics/kinships-2000.png}
-  }
-   \subcolumn{.6}
-  \block{}{
-%  \centering
-  \input{pics/demographic-example.tex}
-  }
-    \colorlet{notebgcolor}{teal!30}
-   \note[targetoffsetx=0cm, targetoffsety=+11cm,width=.2\textwidth,innersep=.4cm]{
-Using \texttt{msprime} [2], I simulated a three-population demographic scenario, sampling twelve 100Mb chromosomes from each of the three populations. I assumed a recombination rate of $1\times 10^{-8}$ base/generation.
-The five heatplots on the left show the total proportion of IBD sharing between each pair of simulated samples with respect to ancestors from five different time points. 
-The simulation took $\approx 6$ sec to run, and IBD information was extracted in a further $\approx 2$ sec.
-   }
-  \end{subcolumns}
-
-
-
-     \column{.5}
-     %%% BLOCK 2
-         \block[titleoffsety=-3cm,bodyoffsety=1.5cm]{2. IBD and ancestry in tree sequences}{}  
-%          \begin{subcolumns}       
-%         \subcolumn{.45}
-          \block{}{
-          \begin{center}
-          \input{pics/ancestry-and-ibd-in-trees.tex}
-          \end{center}
 {\fontsize{34}{35}\selectfont Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represents the data:
           \begin{itemize}
           \item {\it \magenta{Identity-by-descent}: which samples share a common ancestor? How recently? Over which genomic interval?}
