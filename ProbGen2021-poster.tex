@@ -1,0 +1,277 @@
+ \documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm,
+     blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter} %Default values for poster format options.
+     
+\usepackage{tabularx,booktabs,adjustbox} % For tables
+\usepackage{wrapfig,anyfontsize,lipsum}
+\linespread{1.2}
+\usetikzlibrary{calc,fit,arrows,decorations.pathmorphing,backgrounds,fit,positioning}
+\usetikzlibrary{shapes.symbols}
+
+\usepackage{color,colortbl}
+\definecolor{Cblack}{rgb}{0,0,0}
+\definecolor{Corange}{rgb}{0.9,0.6,0}
+\definecolor{Cskyblue}{rgb}{0.35,0.7,0.9}
+\definecolor{Cbluegreen}{rgb}{0,0.6,0.5}
+\definecolor{Cyellow}{rgb}{0.95,0.9,0.25}
+\definecolor{Cblue}{rgb}{0,0.45,0.7}
+\definecolor{Cvermillion}{rgb}{0.8,0.4,0}
+\definecolor{Cpurple}{rgb}{0.8,0.6,0.7}
+
+\newcommand{\Cblack}[1]{\textcolor{Cblack}{#1}}
+\newcommand{\Corange}[1]{\textcolor{Corange}{#1}}
+\newcommand{\Cskyblue}[1]{\textcolor{Cskyblue}{#1}}
+\newcommand{\Cbluegreen}[1]{\textcolor{Cbluegreen}{#1}}
+\newcommand{\Cyellow}[1]{\textcolor{Cyellow}{#1}}
+\newcommand{\Cblue}[1]{\textcolor{Cblue}{#1}}
+\newcommand{\Cvermillion}[1]{\textcolor{Cvermillion}{#1}}
+\newcommand{\Cpurple}[1]{\textcolor{Cpurple}{#1}}
+
+ \newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+ \newcommand{\teal}[1]{\textcolor{teal}{#1}}
+  \newcommand{\gray}[1]{\textcolor{gray}{#1}}
+
+% tikz colour settings
+\tikzset{pop0/.style={red!50!yellow},pop1/.style={violet!80},pop2/.style={olive!70!green}}
+
+\definecolorpalette{myColorPalette} {
+\definecolor{colorOne}{named}{teal}
+\definecolor{colorTwo}{named}{white}
+\definecolor{colorThree}{named}{cyan}
+}
+
+ \tikzposterlatexaffectionproofoff %shows small comment on how the poster was made at bottom of poster
+
+ % Commands
+ \newcommand{\bs}{\textbackslash}   % backslash
+ \newcommand{\cmd}[1]{{\bf \color{red}#1}}   % highlights command
+% \newcommand{\crossmark}{\ding{55}}
+
+ % Title, Author, Institute
+ \title{{\bf Analysis, inference and simulation of identity-by-descent in large datasets}}
+ \author{{\bf Georgia Tsambos}}
+ \institute{{\bf University of Melbourne, Australia}}
+
+ % -- PREDEFINED THEMES ---------------------- %
+ % Choose LAYOUT:  Default, Basic, Rays, Simple, Envelope, Wave, Board, Autumn, Desert,
+ \usetheme{Autumn}
+\usecolorstyle[colorPalette=myColorPalette]{Denmark}
+
+
+ \begin{document}
+
+     \maketitle
+\block[bodyverticalshift=-2cm]{}{
+   {\large\teal{
+ Georgia Tsambos (1, 2), Peter Ralph (3), Jerome Kelleher (4), Stephen Leslie (1, 2, 5), Damjan Vukcevic (1, 2).
+(1) School of Mathematics and Statistics, University of Melbourne, Australia (2) Melbourne Integrative Genomics, University of Melbourne, Australia, (3) Department of Mathematics, University of Oregon, United States, (4) Big Data Institute, University of Oxford, United Kingdom, (5) School of Biosciences, University of Melbourne, Australia. Presenting author: gtsambos (at) student.unimelb.edu.au}
+}
+}
+   
+   %%% BLOCK 0  
+ \block[titleoffsety=1cm,bodyverticalshift=-20cm]{0. Introduction}{
+ }
+ \begin{columns}
+ \begin{subcolumns}
+   \subcolumn{31} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{
+{\fontsize{34}{35}\selectfont Identity-by-descent (IBD) analyses make it possible to study the relatedness of individuals on a detailed scale without invoking murky concepts of population labels. 
+This poster showcases a recent advance in the tskit [1] software, the \texttt{find-ibd} method, which allows complete IBD information to be calculated efficiently on large samples at all time scales. 
+The utility of this tool will be demonstrated with simulations, as well as with data from the Human Genome Diversity Project.}\\[3mm] 
+    }
+ \end{subcolumns}
+ \end{columns}
+
+%%% BLOCK 1
+     \begin{columns}%blocks will be placed into columns
+         \column{.5}
+         \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. The data structure: tree sequences}{
+\begin{center}
+{\tt\small
+\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cvermillion{A}AATAGCGTA\ldots \\
+\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
+\ldots GTAACGCGATAAGA\Cskyblue{T}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\
+\ldots GTAACGCGATAAGA\Cvermillion{G}ATTAGCCCAAAAACACAGACATGG\Cskyblue{T}AATAGCGTA\ldots \\[1mm]
+}
+\[
+\uparrow
+\]
+\input{pics/tree-sequence.tex}
+\[
+\Updownarrow
+\]
+{\small
+\renewcommand\baselinestretch{0.8}\selectfont
+\begin{tabularx}{.05\textwidth}{p{1.5cm}X}
+\toprule
+\multicolumn{2}{c}{{\bf Nodes}}\\
+\midrule
+ID & time  \\
+\midrule
+0 & 0.0 \\
+1 & 0.0\\
+2 & 0.0\\
+3 & 0.0\\
+4 & 1.1\\
+5 & 1.8\\
+6 & 3.0\\
+7 & 3.5\\
+8 & 4.0\\
+ & \\
+ & \\
+ \end{tabularx}\quad\quad\begin{tabularx}{.10\textwidth}{p{1.5cm}p{1.5cm}p{2cm}X}
+\toprule
+\multicolumn{4}{c}{{\bf Edges}}\\
+\midrule
+left & right & parent & child  \\
+\midrule
+3.0 & 10.0 & 4 & 2 \\
+3.0 & 10.0 & 4 & 3\\
+0.0 & 10.0 & 5 & 1\\
+0.0 & 3.0 & 5 & 3\\
+3.0 & 10.0 & 5 & 4\\
+0.0 & 7.0 & 6 & 0\\
+0.0 & 7.0 & 6 & 5 \\
+7.0 & 10.0 & 7 & 0\\
+7.0 & 10.0 & 7 & 5\\
+0.0 & 3.0 & 8 & 2\\
+0.0 & 3.0 & 8 & 6 \\
+\end{tabularx}\quad\quad\begin{tabularx}{.08\textwidth}{p{2.5cm}p{1.5cm}X}
+\toprule
+\multicolumn{3}{c}{{\bf Mutations}}\\
+\midrule
+location & time& node  \\
+\midrule
+1.5 & 2.3 & 5\\
+8.9 & 1.2 & 0\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & &\\
+ & & \\
+ & & \\
+ \end{tabularx}
+}
+\end{center}
+\vspace{10mm}
+{\fontsize{34}{35}\selectfont The {\bf\magenta{tree sequence}} data structure [1,2] encodes a complete genealogy for a sample of chromosomes in a succinct set of tables. Compared with traditional sequence-based formats, tree sequences are \emph{compact}, \emph{fast} to process and \emph{informative} of the history of the sample.}
+     }
+     
+     %%%% BLOCK 3
+     \block[titleoffsety=1cm,bodyoffsety=5cm]{3. Example: total IBD sharing over time}{
+     } 
+\centering
+  \begin{subcolumns}
+
+  \subcolumn{.25}
+   \block{}{
+%   \centering
+   \includegraphics[scale=.63]{pics/kinships-10000.png}
+   \includegraphics[scale=.63]{pics/kinships-8000.png}
+    \includegraphics[scale=.63]{pics/kinships-6000.png}
+    \includegraphics[scale=.63]{pics/kinships-4000.png}
+\includegraphics[scale=.63]{pics/kinships-2000.png}
+  }
+   \subcolumn{.6}
+  \block{}{
+%  \centering
+  \input{pics/demographic-example.tex}
+  }
+    \colorlet{notebgcolor}{teal!30}
+   \note[targetoffsetx=0cm, targetoffsety=+11cm,width=.2\textwidth,innersep=.4cm]{
+Using \texttt{msprime} [2], I simulated a three-population demographic scenario, sampling twelve 100Mb chromosomes from each of the three populations. I assumed a recombination rate of $1\times 10^{-8}$ base/generation.
+The five heatplots on the left show the total proportion of IBD sharing between each pair of simulated samples with respect to ancestors from five different time points. 
+The simulation took $\approx 6$ sec to run, and IBD information was extracted in a further $\approx 2$ sec.
+   }
+  \end{subcolumns}
+
+
+
+     \column{.5}
+     %%% BLOCK 2
+         \block[titleoffsety=-3cm,bodyoffsety=1.5cm]{2. IBD and ancestry in tree sequences}{}  
+%          \begin{subcolumns}       
+%         \subcolumn{.45}
+          \block{}{
+          \begin{center}
+          \input{pics/ancestry-and-ibd-in-trees.tex}
+          \end{center}
+{\fontsize{34}{35}\selectfont Questions about inheritance and ancestry can be reframed as questions about the underlying tree sequence that represents the data:
+          \begin{itemize}
+          \item {\it \magenta{Identity-by-descent}: which samples share a common ancestor? How recently? Over which genomic interval?}
+          \item {\it \magenta{Local ancestry}: which ancestors have which population labels? Which samples descend from them? Over which genomic interval?}
+          \end{itemize}
+Extracting this information from large datasets requires efficient algorithms that account for the correlations in genealogical structure between samples, and across chromosomes.}
+          }           
+       
+\vspace{20cm}
+
+             \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
+
+\begin{adjustbox}{valign=b}
+\begin{minipage}[t]{0.5\linewidth}
+{\small
+\begin{tabularx}{.8\textwidth}{p{9cm}X}
+\toprule
+\multicolumn{2}{c}{\bf Model inference}\\
+\midrule
+Posterior probability for correct~model &  $96.33\% \pm 2.68\%$ \\
+Votes for correct demography &$93.36\% \pm 4.69\%$\\
+Prior error rate & $0.0993 \pm 0.0008$ \\
+\bottomrule
+\end{tabularx}
+}
+\end{minipage}\end{adjustbox}\begin{adjustbox}{valign=c}
+\begin{minipage}[t]{0.35\linewidth}
+\includegraphics[scale=.2]{pics/abc-ibd-4.png}
+\end{minipage}
+\end{adjustbox}
+
+{\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
+Closely following [3], we performed 100 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [3], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+All simulations and analyses ran on a standard desktop in $<12$ hours.
+}
+}
+     \end{columns}
+
+%%% BLOCK 5
+ \block[titleoffsety=1.2cm,bodyoffsety=1.2cm]{5. Acknowledgements, references and further information}{
+ }
+  \begin{columns}
+ \begin{subcolumns}
+ \renewcommand\baselinestretch{1}\selectfont
+    \subcolumn{22} \block[bodyoffsetx=1.5cm,bodyverticalshift=-5cm]{}{\footnotesize
+     GT is funded by the Helen Freeman scholarship, the Maurice Belz Fund and the Australian Government's Research Training Scheme.\\[1mm]
+     [1] \texttt{https://tskit.readthedocs.io/en/latest/}\\[1mm]
+     [2] Kelleher, J., et al. (2016). Efficient Coalescent Simulation and Genealogical Analysis for Large Sample Sizes. PLOS Computational Biology, 12(5).\\[1mm]
+     [3] Gladstein, A and Hammer, M. (2019). Substructured Population Growth in the Ashkenazi Jews Inferred with Approximate Bayesian Computation. Molecular Biology and Evolution, 36(6), 1162-1171.\\[1mm] 
+    [4] Raynal, L., et al. (2019). ABC random forests for Bayesian parameter inference. Bioinformatics, 35(10), 1720 - 1728.\\[1mm]
+	[5] Csillery, K., et al. (2012). Abc: An R package for approximate Bayesian computation (ABC). Methods in Ecology and Evolution, 3(3), 475 - 479.
+     }
+
+       \subcolumn{3} \block[bodyoffsetx=-3cm,bodyverticalshift=-5.7cm]{}{
+       \begin{center}
+       {\small Come say hi!}\\
+       \includegraphics[scale=1]{pics/GT_headshot.jpg} 
+       \end{center}
+       }
+       \subcolumn{3} \block[bodyoffsetx=-4cm,bodyverticalshift=-5cm]{}{
+       \begin{center}
+       \includegraphics[scale=1.2]{pics/unimelb-logo.jpg}
+      \end{center}
+       }
+       \subcolumn{3} \block[bodyoffsetx=-5cm,bodyverticalshift=-6cm]{}{
+       \begin{center}
+       \includegraphics[scale=1]{pics/tskit-logo.png}
+      \end{center}
+       }
+ \end{subcolumns}
+ \end{columns}         
+
+ \end{document}
+
+
+\endinput
+%%
+%% End of file `tikzposter-example.tex'.
