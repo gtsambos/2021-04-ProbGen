@@ -102,7 +102,7 @@ An illustration of this process is shown above.
      }
      
      %%%% BLOCK 3
-     \block[titleoffsety=1cm,bodyoffsety=5cm]{3. Example: total IBD sharing over time}{
+     \block[titleoffsety=1cm,bodyoffsety=5cm]{Application 1:  shared ancestry in the HGDP}{
      } 
 \centering
   \begin{subcolumns}
@@ -166,7 +166,7 @@ This makes it extremely efficient.
        
 \vspace{20cm}
 
-             \block[titleoffsety=0cm,bodyoffsety=0cm]{4. Application: demography inference}{
+             \block[titleoffsety=0cm,bodyoffsety=0cm]{Application 2: simulation-based inference}{
 
 \begin{adjustbox}{valign=b}
 \begin{minipage}[t]{0.5\linewidth}
@@ -187,8 +187,8 @@ Prior error rate & $0.0993 \pm 0.0008$ \\
 \end{minipage}
 \end{adjustbox}
 
-{\fontsize{34}{35}\selectfont To explore the power of our method, we attempted to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
-Closely following [3], we performed 100 000 simulations of various demographic scenarios, and 20 simulations under the parameter values inferred by [3], which we treated as proxies for the truth. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
+{\fontsize{34}{35}\selectfont To explore the power of \texttt{find-ibd}, we used it to recreate some of the important findings from a recent study of Ashkenazi Jewish (AJ) demographic history [3]. This work provided evidence for a recent divergence event between Eastern and Western communities of AJ people. It was estimated that this happened about 15 generations ago.\\[2mm]
+Closely following [3], we performed 100 000 simulations of various demographic scenarios with \texttt{msprime} [2], and 20 simulations under the parameter values inferred by [3], which we treated as artificial truth datasets. For each simulation, we calculated moments of IBD segment lengths at multiple time points. We used the \texttt{abcrf} package [4] to infer the most plausible demographic scenario, and the \texttt{abc} package [5] with neural-net regression to estimate parameter values.\\
 All simulations and analyses ran on a standard desktop in $<12$ hours.
 }
 }
