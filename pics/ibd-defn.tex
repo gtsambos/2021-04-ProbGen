@@ -1,12 +1,12 @@
 
-\begin{tikzpicture}[yscale=0.09, xscale=0.12]
+\begin{tikzpicture}[yscale=0.7, xscale=0.7]
 
 \tikzset{
 pop1/.style={fill=blue!40,draw=black!50},
 pop2/.style={fill=red!40,draw=black!50},
 ibd/.style={pattern=crosshatch,pattern color=black!70,draw=black!50},
 nonibd/.style={fill=white,draw=black!50},
-inherit/.style={->,>=stealth,ultra thin,shorten <=2mm,shorten >=2mm,very thin},
+inherit/.style={->,>=stealth,thick,shorten <=2mm,shorten >=2mm,very thin},
 recomb/.style={thick,draw=black!70}
 }
 
@@ -34,57 +34,57 @@ recomb/.style={thick,draw=black!70}
 \node (chr2) at ($-1.25*(hapy)$) {};
 
 
-% Haplotypes
-
-\filldraw[pop1] ($(gen1) + (ind1gen1) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop1] ($(gen1) + (ind1gen1) + (chr2)$) rectangle +(hapxy);
-
-\filldraw[pop2] ($(gen1) + (ind2gen1) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop2] ($(gen1) + (ind2gen1) + (chr2)$) rectangle +(hapxy);
-
-\filldraw[pop1] ($(gen1) + (ind3gen1) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop1] ($(gen1) + (ind3gen1) + (chr2)$) rectangle +(hapxy);
-
-\filldraw[pop2] ($(gen1) + (ind4gen1) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop2] ($(gen1) + (ind4gen1) + (chr2)$) rectangle +(hapxy);
-
-
-\filldraw[pop1] ($(gen2) + (ind1gen2) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop2] ($(gen2) + (ind1gen2) + (chr2)$) rectangle +(hapxy);
-
-\filldraw[pop1] ($(gen2) + (ind2gen2) + (chr1)$) rectangle +(hapxy);
-\filldraw[pop2] ($(gen2) + (ind2gen2) + (chr2)$) rectangle +(hapxy);
-
-
-\filldraw[pop1] ($(gen3) + (ind1gen3) + (chr1)$) rectangle +(hapxy);
-\fill[pop1] ($(gen3) + (ind1gen3) + (chr2)$) rectangle +(hapxy);
-\fill[pop2] ($(gen3) + (ind1gen3) + (chr2)+ 2*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
-\fill[pop1] ($(gen3) + (ind1gen3) + (chr2)+ 4*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
-\fill[pop2] ($(gen3) + (ind1gen3) + (chr2)+ 9*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
-%\draw ($(gen3) + (ind1gen3) + (chr2)$) rectangle +(hapxy);
-
-
-% Copying lines
-
+%% Haplotypes
+%
+%\filldraw[pop1] ($(gen1) + (ind1gen1) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop1] ($(gen1) + (ind1gen1) + (chr2)$) rectangle +(hapxy);
+%
+%\filldraw[pop2] ($(gen1) + (ind2gen1) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop2] ($(gen1) + (ind2gen1) + (chr2)$) rectangle +(hapxy);
+%
+%\filldraw[pop1] ($(gen1) + (ind3gen1) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop1] ($(gen1) + (ind3gen1) + (chr2)$) rectangle +(hapxy);
+%
+%\filldraw[pop2] ($(gen1) + (ind4gen1) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop2] ($(gen1) + (ind4gen1) + (chr2)$) rectangle +(hapxy);
+%
+%
+%\filldraw[pop1] ($(gen2) + (ind1gen2) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop2] ($(gen2) + (ind1gen2) + (chr2)$) rectangle +(hapxy);
+%
+%\filldraw[pop1] ($(gen2) + (ind2gen2) + (chr1)$) rectangle +(hapxy);
+%\filldraw[pop2] ($(gen2) + (ind2gen2) + (chr2)$) rectangle +(hapxy);
+%
+%
+%\filldraw[pop1] ($(gen3) + (ind1gen3) + (chr1)$) rectangle +(hapxy);
+%\fill[pop1] ($(gen3) + (ind1gen3) + (chr2)$) rectangle +(hapxy);
+%\fill[pop2] ($(gen3) + (ind1gen3) + (chr2)+ 2*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
+%\fill[pop1] ($(gen3) + (ind1gen3) + (chr2)+ 4*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
+%\fill[pop2] ($(gen3) + (ind1gen3) + (chr2)+ 9*(hapx)$) rectangle ($(gen3) + (ind1gen3) + (chr2)+ (hapxy)$);
+%%\draw ($(gen3) + (ind1gen3) + (chr2)$) rectangle +(hapxy);
+%
+%
+%% Copying lines
+%
 \node (startline) at ($-1*(hapx) + 0.5*(hapy)$) {};
 \node (chrdiff) at ($(chr1) - (chr2)$) {};
-
-
-% Arrows
-\draw[inherit] ($(gen1) + (ind1gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind1gen2) + (chr1) + 0.5*(hapy)$);
-\draw[inherit] ($(gen1) + (ind2gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind1gen2) + (chr2) + 0.5*(hapy)$);
-\draw[inherit] ($(gen1) + (ind3gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind2gen2) + (chr1) + 0.5*(hapy)$);
-\draw[inherit] ($(gen1) + (ind4gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind2gen2) + (chr2) + 0.5*(hapy)$);
-
-\draw[inherit] ($(gen2) + (ind1gen2) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen3) + (ind1gen3) + (chr1) + 0.5*(hapy)$);
-\draw[inherit] ($(gen2) + (ind2gen2) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen3) + (ind1gen3) + (chr2) + 0.5*(hapy)$);
+%
+%
+%% Arrows
+%\draw[inherit] ($(gen1) + (ind1gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind1gen2) + (chr1) + 0.5*(hapy)$);
+%\draw[inherit] ($(gen1) + (ind2gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind1gen2) + (chr2) + 0.5*(hapy)$);
+%\draw[inherit] ($(gen1) + (ind3gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind2gen2) + (chr1) + 0.5*(hapy)$);
+%\draw[inherit] ($(gen1) + (ind4gen1) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen2) + (ind2gen2) + (chr2) + 0.5*(hapy)$);
+%
+%\draw[inherit] ($(gen2) + (ind1gen2) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen3) + (ind1gen3) + (chr1) + 0.5*(hapy)$);
+%\draw[inherit] ($(gen2) + (ind2gen2) + (chr2) + 10*(hapx) + 0.75*(chrdiff)$) -- ($(gen3) + (ind1gen3) + (chr2) + 0.5*(hapy)$);
 
 
 %%%%%%%%%%%%%%%%%%%%%
 % Identity-by-descent
 % Nodes
 \node (hapx) at (1,0) {};
-\node (hapyIBD) at (0,+30.0) {};
+\node (hapyIBD) at (0,+17.0) {};
 %\node (hapxy) at ($10*(hapx) + (hapy)$) {};
 
 %\node (gen1) at (0,0) {};
@@ -131,13 +131,13 @@ recomb/.style={thick,draw=black!70}
 \draw[inherit] ($(gen2) + (ind2gen2) + (chr1) + 10*(hapx) - 0.25*(chrdiff)$) -- ($(gen3) + (ind2gen3) + (chr1) + 0.5*(hapy)$);
 
 % IBD highlight.
-\draw[color=teal,very thick] ($(gen3) + (ind1gen3) + (chr2) + 3*(hapx)$) rectangle +($4*(hapx) + (hapy)$);
-\draw[color=teal,very thick] ($(gen3) + (ind2gen3) + (chr1) + 3*(hapx)$) rectangle +($4*(hapx) + (hapy)$);
-\draw[color=teal,very thick,<->,shorten <=2mm,shorten >=2mm] ($(gen3) + (ind1gen3) + (chr2) + 5*(hapx)$) -- ($(gen3) + (ind2gen3) + (chr1) + 5*(hapx) + (hapy)$) ; 
+\draw[color=teal,ultra thick] ($(gen3) + (ind1gen3) + (chr2) + 3*(hapx)$) rectangle +($4*(hapx) + (hapy)$);
+\draw[color=teal,ultra thick] ($(gen3) + (ind2gen3) + (chr1) + 3*(hapx)$) rectangle +($4*(hapx) + (hapy)$);
+\draw[color=teal,ultra thick,<->,shorten <=2mm,shorten >=2mm] ($(gen3) + (ind1gen3) + (chr2) + 5*(hapx)$) -- ($(gen3) + (ind2gen3) + (chr1) + 5*(hapx) + (hapy)$) ; 
 
 % Labels
-%\node (lab1) at ($(gen1) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\scriptsize $\texttt{Generation 0}$};
-%\node (lab2) at ($2*(gen2) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\scriptsize $\texttt{Generation 1}$};
-%\node (lab3) at ($4*(gen2) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\scriptsize $\texttt{Generation 2}$};
+\node (lab1) at ($(gen1) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\small $\texttt{Generation 0}$};
+\node (lab2) at ($2*(gen2) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\small $\texttt{Generation 1}$};
+\node (lab3) at ($4*(gen2) + 2.5*(indsep) + 0.5*(hapxy) - (hapyIBD)$) {\small $\texttt{Generation 2}$};
 
 \end{tikzpicture}

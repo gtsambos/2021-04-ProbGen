@@ -4,7 +4,7 @@
 \usepackage{tabularx,booktabs,adjustbox} % For tables
 \usepackage{wrapfig,anyfontsize,lipsum}
 \linespread{1.2}
-\usetikzlibrary{calc,fit,arrows,decorations.pathmorphing,backgrounds,fit,positioning}
+\usetikzlibrary{calc,fit,arrows,decorations.pathmorphing,backgrounds,fit,positioning,patterns}
 \usetikzlibrary{shapes.symbols}
 
 \usepackage{color,colortbl}
@@ -86,6 +86,14 @@ The utility of this tool will be demonstrated with simulations, as well as with 
          \block[roundedcorners=40,titleoffsety=-3cm,bodyoffsety=-3cm,bodyverticalshift=-1cm]{1. Data structures and definitions}{
 
 {\fontsize{34}{35}\selectfont The {\bf\magenta{tree sequence}} data structure [1,2] encodes a complete genealogy for a sample of chromosomes in a succinct set of tables. Compared with traditional sequence-based formats, tree sequences are \emph{compact}, \emph{fast} to process and \emph{informative} of the history of the sample.
+
+\vspace{10mm}
+
+\begin{center}
+\input{pics/ibd-defn.tex}
+\end{center}
+
+\vspace{-80mm}
 
 In diploid species, each position of an organism's genome is inherited from one of the two genomes held by each of the parental individuals.
 Two segments of DNA in different chromosomes that have been inherited whole (ie. unbroken by recombination) from the same ancestral chromosome are said to be {\bf \magenta{ identical by descent}}, or {\bf \magenta{IBD}}.
