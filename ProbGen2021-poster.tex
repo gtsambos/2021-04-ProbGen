@@ -105,29 +105,12 @@ An illustration of this process is shown above.
      \block[titleoffsety=1cm,bodyoffsety=5cm]{Application 1:  shared ancestry in the HGDP}{
      } 
 \centering
-  \begin{subcolumns}
-
-  \subcolumn{.25}
-   \block{}{
-%   \centering
-   \includegraphics[scale=.63]{pics/kinships-10000.png}
-   \includegraphics[scale=.63]{pics/kinships-8000.png}
-    \includegraphics[scale=.63]{pics/kinships-6000.png}
-    \includegraphics[scale=.63]{pics/kinships-4000.png}
-\includegraphics[scale=.63]{pics/kinships-2000.png}
-  }
-   \subcolumn{.6}
-  \block{}{
-%  \centering
-  \input{pics/demographic-example.tex}
-  }
-    \colorlet{notebgcolor}{teal!30}
-   \note[targetoffsetx=0cm, targetoffsety=+11cm,width=.2\textwidth,innersep=.4cm]{
-Using \texttt{msprime} [2], I simulated a three-population demographic scenario, sampling twelve 100Mb chromosomes from each of the three populations. I assumed a recombination rate of $1\times 10^{-8}$ base/generation.
-The five heatplots on the left show the total proportion of IBD sharing between each pair of simulated samples with respect to ancestors from five different time points. 
-The simulation took $\approx 6$ sec to run, and IBD information was extracted in a further $\approx 2$ sec.
-   }
-  \end{subcolumns}
+ \block{}{
+A recent preprint [6] used the \texttt{tsinfer} and \texttt{tsdate} software to produce an inferred tree sequence that combined several well-known human genetics datasets.
+We applied \texttt{find-ibd} to the subset of this dataset corresponding to samples from the Human Genome Diversity Project (HGDP) [7],
+and present the following plots as an illustration of what is possible with our method.
+A more complete analysis of this dataset will be in our upcoming preprint.   
+ }
 
 
 
@@ -206,7 +189,9 @@ All simulations and analyses ran on a standard desktop in $<12$ hours.
      [2] Kelleher, J., et al. (2016). Efficient Coalescent Simulation and Genealogical Analysis for Large Sample Sizes. PLOS Computational Biology, 12(5).\\[1mm]
      [3] Gladstein, A and Hammer, M. (2019). Substructured Population Growth in the Ashkenazi Jews Inferred with Approximate Bayesian Computation. Molecular Biology and Evolution, 36(6), 1162-1171.\\[1mm] 
     [4] Raynal, L., et al. (2019). ABC random forests for Bayesian parameter inference. Bioinformatics, 35(10), 1720 - 1728.\\[1mm]
-	[5] Csillery, K., et al. (2012). Abc: An R package for approximate Bayesian computation (ABC). Methods in Ecology and Evolution, 3(3), 475 - 479.
+	[5] Csillery, K., et al. (2012). Abc: An R package for approximate Bayesian computation (ABC). Methods in Ecology and Evolution, 3(3), 475 - 479.\\[1mm]
+	[6] Wohns, A. W., et al. (2021). A unified genealogy of modern and ancient genomes, 1–31. https://doi.org/10.1101/2021.02.16.431497\\[1mm]
+	[7] Bergström, A.,et al. (2020). Insights into human genetic variation and population history from 929 diverse genomes. Science, 367(6484). https://doi.org/10.1126/science.aay5012
      }
 
        \subcolumn{3} \block[bodyoffsetx=-3cm,bodyverticalshift=-5.7cm]{}{
